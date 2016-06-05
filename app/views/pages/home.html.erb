@@ -1,0 +1,11 @@
+<h1>Bienvenue sur l'application !</h1>
+
+<% if @current_user %>
+  Vous êtes connecté avec le compte <%= @current_user.name %>.
+  <%= form_tag "/users/login", method: "delete" do %>
+    <input type="submit" value="Déconnexion">
+  <% end %>
+<% else %>
+  Vous n'êtes pas connecté.
+  <a href="/users/login">Se connecter</a>
+<% end %>
