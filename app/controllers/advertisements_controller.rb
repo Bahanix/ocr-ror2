@@ -1,5 +1,5 @@
 class AdvertisementsController < ApplicationController
-  before_action :set_advertisement, only: [:show]
+  before_action :set_advertisement, only: [:show, :publish]
 
   # GET /advertisements
   def index
@@ -30,6 +30,17 @@ class AdvertisementsController < ApplicationController
     else
       render :new
     end
+  end
+
+  # POST /advertisements/1/publish
+  def publish
+    unless @current_user.try(:admin?)
+      flash[:error] = "Accès interdit"
+      return redirect_to request.referrer || root_path
+    end
+
+    @advertisement.update state: :published
+    redirect_to @advertisement, notice: 'Annonce publiée'
   end
 
   private

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   delete 'users/login' => 'users#logout'
 
   resources :advertisements, only: [:index, :new, :create, :show]
+  post 'advertisements/:id/publish' => 'advertisements#publish'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

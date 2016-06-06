@@ -13,4 +13,10 @@
   <%= @advertisement.state %>
 </p>
 
+<% if @current_user.try(:admin?) && @advertisement.state != 'published' %>
+  <%= form_tag "/advertisements/#{@advertisement.id}/publish", method: :post do %>
+    <input type="submit" value="Publier">
+  <% end %>
+<% end %>
+
 <%= link_to 'Retour à la liste des annonces', advertisements_path %>
