@@ -1,0 +1,27 @@
+<%= form_for(advertisement) do |f| %>
+  <% if advertisement.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(advertisement.errors.count, "erreurs") %> doivent être corrigées pour proposer l'annonce :</h2>
+
+      <ul>
+      <% advertisement.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title, "Titre" %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :content, "Contenu" %>
+    <%= f.text_area :content %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Proposer l'annonce" %>
+  </div>
+<% end %>

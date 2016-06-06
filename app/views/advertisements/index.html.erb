@@ -1,0 +1,16 @@
+<h1>Liste des annonces</h1>
+
+<table>
+  <tbody>
+    <% @advertisements.each do |advertisement| %>
+      <tr>
+        <td><%= advertisement.title %></td>
+        <td><%= link_to 'Voir', advertisement %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Proposer une nouvelle annonce', new_advertisement_path %>
