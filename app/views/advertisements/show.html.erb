@@ -19,4 +19,16 @@
   <% end %>
 <% end %>
 
-<%= link_to 'Retour à la liste des annonces', advertisements_path %>
+<h2>Commentaires</h2>
+
+<% @advertisement.comments.each do |comment| %>
+  <%= render 'comments/show', comment: comment %>
+<% end %>
+
+<h2>Ajouter un commentaires</h2>
+
+<%= render 'comments/form', comment: @comment %>
+
+<p>
+  <%= link_to 'Retour à la liste des annonces', advertisements_path %>
+</p>

@@ -1,4 +1,11 @@
 class AdvertisementsController < ApplicationController
+  # Cette fonction est dans le ApplicationController,
+  # Elle redirige l'utilisateur vers l'interfac de connexion
+  # s'il n'est pas connecté
+  before_action :authenticate_user!, only: [:create]
+
+  # Cette fonction évite de répéter plusieurs fois une ligne de code
+  # Elle est en bas de ce présent fichier.
   before_action :set_advertisement, only: [:show, :publish]
 
   # GET /advertisements
@@ -12,6 +19,8 @@ class AdvertisementsController < ApplicationController
 
   # GET /advertisements/1
   def show
+    @comment = Comment.new
+    @comment.advertisement = @advertisement
   end
 
   # GET /advertisements/new
@@ -44,13 +53,12 @@ class AdvertisementsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_advertisement
       @advertisement = Advertisement.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def advertisement_params
+      # N'autorisez surtout pas user_id car il est automatiquement mis avec @current_user !
       params.require(:advertisement).permit(:title, :content)
     end
 end

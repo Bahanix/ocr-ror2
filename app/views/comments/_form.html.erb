@@ -1,0 +1,32 @@
+<%= form_for(comment) do |f| %>
+  <% if comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(comment.errors.count, "erreur") %> empêche la publication du commentaire :</h2>
+
+      <ul>
+      <% comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :advertisement_id %>
+
+  <!--
+    La notation ci-dessus est équivalente à celle-ci :
+    <input type="hidden" name="comment[advertisement_id]" value="<%= comment.advertisement %>">
+    La valeur comment.advertisement est obtenue via le contrôleur, mais on aurai pu aussi faire ainsi :
+    <input type="hidden" name="comment[advertisement_id]" value="<%= params[:id] %>">
+    Mais uniquement parce que ce formulaire est affiché sur le show de l'advertisements, qui est ici :
+    /advertisements/:id
+  -->
+
+  <div class="field">
+    <%= f.text_area :content %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Publier" %>
+  </div>
+<% end %>

@@ -1,11 +1,22 @@
 <h1>Bienvenue sur l'application !</h1>
 
-<% if @current_user %>
-  Vous êtes connecté avec le compte <%= @current_user.name %>.
-  <%= form_tag "/users/login", method: "delete" do %>
-    <input type="submit" value="Déconnexion">
+<p>
+  <% if @current_user %>
+    Vous êtes connecté avec le compte <%= @current_user.name %>.
+    <%= form_tag "/users/login", method: "delete" do %>
+      <input type="submit" value="Déconnexion">
+    <% end %>
+  <% else %>
+    Vous n'êtes pas connecté.
+    <a href="/users/login">Se connecter</a>
   <% end %>
-<% else %>
-  Vous n'êtes pas connecté.
-  <a href="/users/login">Se connecter</a>
-<% end %>
+</p>
+
+<p>
+  <%= link_to 'Voir les annonces', advertisements_path %>
+
+  <!--
+    La notation ci-dessus est équivalent à celle-ci :
+    <a href="/advertisements">Voir les annonces</a>
+  -->
+</p>

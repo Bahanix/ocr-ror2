@@ -6,6 +6,13 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def authenticate_user!
+    unless @current_user
+      flash[:error] = "Accès interdit"
+      return redirect_to '/users/login'
+    end
+  end
+
   def set_current_user
     if session[:user_id]
       @current_user = User.find(session[:user_id])
